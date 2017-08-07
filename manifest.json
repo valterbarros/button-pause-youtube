@@ -1,0 +1,31 @@
+{
+  "name": "Youtube Pause",
+  "version": "1.3",
+  "description": "Pause a vídeo on youtube",
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon-pause-128.png",
+    "default_title": "Pause youtube video",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://www.youtube.com/"
+  ],
+  "manifest_version": 2,
+  "commands": {
+    "pause_video": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Q",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "Pause youtube video",
+      "global": true
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tab Zoom Extension</title>
+    <style>
+      body {
+        width: 150px;
+        overflow-x: hidden;
+        color: #ffff00;
+        background-color: #186464;
+      }
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 19px;
+        height: 19px;
+      }
+    </style>
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <select id="selectButton"> 
+        <option>--Select a Option--</option>
+      </select>
+    </div>
+    <button type="button" id="closeButton">Close</button>
+    <button type="button" id="pauseButton">Pause</button>
+</html>
+

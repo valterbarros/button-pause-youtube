@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var select = document.getElementById("selectButton")
     var option;
     for (var i = 0; i < tabs.length; i++) {
-      var tabYoutubeRegex = /youtube/
+      var tabYoutubeRegex = /\.youtube\./
       if(tabYoutubeRegex.exec(tabs[i].url) != null){
         option = document.createElement("option");
         option.text = tabs[i].title;
@@ -36,7 +36,7 @@ function doSelected(){
     }
   });
   localStorage["tabid"] = tabId;
-  chrome.tabs.move(parseInt(tabId),{"windowId":1,"index": 0});
+  chrome.tabs.move(parseInt(tabId),{"index": 0});
   chrome.tabs.query({audible: false},function(tabs){
     for (var i = 0; i < tabs.length; i++) {
       if(tabs[i].id == tabId){

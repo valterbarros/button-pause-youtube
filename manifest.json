@@ -11,21 +11,30 @@
     "default_title": "Pause youtube video",
     "default_popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/**"],
+      "js": ["js/contentscript.js"]
+    }
+  ],
   "permissions": [
     "activeTab",
     "tabs",
-    "https://www.youtube.com/"
+    "https://www.youtube.com/**"
   ],
   "manifest_version": 2,
   "commands": {
-    "pause_video": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y",
-        "linux": "Ctrl+Q",
-        "mac": "Command+Shift+Y"
-      },
-      "description": "Pause youtube video",
-      "global": true
+    "playPause": {
+      "global": true,
+      "description": "Pause youtube video"
+    },
+    "playNext": {
+      "global": true,
+      "description": "Next youtube video"
+    },
+    "playPrev": {
+      "global": true,
+      "description": "Prev youtube video"
     }
   }
 }

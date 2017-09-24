@@ -1,26 +1,30 @@
-// Listen for a click on the camera icon. On that click, take a screenshot.
-//chrome.commands.onCommand.addListener(function(command) {
-//  chrome.tabs.query({audible: true},function(tab){
- //   chrome.tabs.executeScript(tab[0].id, {
-  //    code: 'document.getElementsByClassName("ytp-play-button")[0].click();'
-  //  });
-  //});
-//});
+;(function(){
+  var ListConfig = function(){
+    this.playingTab = -1
+    this.hasTabChoised = false
 
-//chrome.browserAction.onClicked.addListener(function() {
- // chrome.tabs.query({audible: true},function(tab){
-  //  chrome.tabs.executeScript(tab[0].id, {
-   //   code: 'document.getElementsByClassName("ytp-play-button")[0].click();'
-    //});
-  //});
-//})
+    ListConfig.prototype.getCurrentTab = function(){
+      return this.playingTab
+    }
 
-chrome.commands.onCommand.addListener(function(command) {
-  if(command == "pause_video"){
-    var tabId = localStorage["tabid"];
-    var tabIdInt = parseInt(tabId);
-    chrome.tabs.executeScript(tabIdInt, {
-      code: 'document.getElementsByClassName("ytp-play-button")[0].click();'
-    });
-  }
-});
+    ListConfig.prototype.setCurrentTab = function(tabId){
+      this.playingTab = parseInt(tabId)
+      this.hasTabChoised = true
+    }
+  };
+  
+  chrome.commands.onCommand.addListener(function(command) {
+    if (window.list_config.hasTabChoised){
+      chrome.tabs.sendMessage( window.list_config.getCurrentTab(), { action: command } );
+    }
+  });
+
+  chrome.runtime.onMessage.addListener(function(request, sender, response){
+    if(request.action === "inject_controller"){
+      console.log('injecting controller');
+      chrome.tabs.executeScript(parseInt(request.tabId), { file: 'js/controllers/YoutubeController.js' });
+    }
+  });
+
+  window.list_config = new ListConfig();
+})();

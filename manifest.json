@@ -11,12 +11,6 @@
     "default_title": "Pause youtube video",
     "default_popup": "popup.html"
   },
-  "content_scripts": [
-    {
-      "matches": ["https://www.youtube.com/**"],
-      "js": ["js/contentscript.js"]
-    }
-  ],
   "permissions": [
     "activeTab",
     "tabs",

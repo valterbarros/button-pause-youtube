@@ -1,1 +1,0 @@
-alert("i'm injected");

@@ -11,6 +11,11 @@
       this.playingTab = parseInt(tabId)
       this.hasTabChoised = true
     }
+
+    ListConfig.prototype.checkYoutubeSite = function(url){
+      var tabYoutubeRegex = new RegExp(/\.youtube\./)
+      return tabYoutubeRegex.test(url)
+    }
   };
   
   chrome.commands.onCommand.addListener(function(command) {
@@ -21,8 +26,12 @@
 
   chrome.runtime.onMessage.addListener(function(request, sender, response){
     if(request.action === "inject_controller"){
-      console.log('injecting controller');
-      chrome.tabs.executeScript(parseInt(request.tabId), { file: 'js/controllers/YoutubeController.js' });
+      chrome.tabs.executeScript(sender.tab.id, { file: 'js/controllers/YoutubeController.js' });
+    }
+
+    if(request.action === "check_youtube_site") {
+      if(sender.tab.index === -1) return response("no_inject");
+      response(window.list_config.checkYoutubeSite(sender.tab.url));
     }
   });
 

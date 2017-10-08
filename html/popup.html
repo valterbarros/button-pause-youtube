@@ -2,22 +2,20 @@
 <html>
   <head>
     <title>Tab Zoom Extension</title>
-    <style>
-      body {
-        width: auto;
-        overflow-x: hidden;
-        color: #ffff00;
-        background-color: #ff0000;
-      }
-
-    </style>
-    <script src="../js/popup/popup.js"></script>
+    <link href="../css/popup/popup.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div style="text-align: center">
+    <div class="popup-options">
+      <h3>
+        <img src="../icon-pause-16.png" width="16" height="16"/> 
+          Youtube Pause - Settings
+      </h3>
+
       <select id="selectButton"> 
-        <option>--Select a Option--</option>
+        <option class="opt-custom">Select a video option</option>
       </select>
     </div>
+    </body>
+    <script src="../js/popup/popup.js"></script>    
 </html>
 

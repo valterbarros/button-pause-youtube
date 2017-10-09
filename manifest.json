@@ -1,20 +1,20 @@
 {
-  "name": "Youtube Pause",
-  "version": "1.3",
-  "description": "Pause a vídeo on youtube",
+  "name": "YouTube Pause",
+  "version": "1.3.0",
+  "description": "Pause a video on YouTube.",
   "background": {
     "persistent": false,
-    "scripts": ["js/background.js"]
+    "scripts": ["public/background.js"]
   },
   "browser_action": {
     "default_icon": "icon-pause-128.png",
-    "default_title": "Pause youtube video",
+    "default_title": "Pause YouTube video",
     "default_popup": "html/popup.html"
   },
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/**"],
-      "js": ["js/contentscript.js"]
+      "js": ["public/contentscript.js"]
     }
   ],
   "permissions": [
@@ -26,15 +26,15 @@
   "commands": {
     "playPause": {
       "global": true,
-      "description": "Pause youtube video"
+      "description": "Pause YouTube video"
     },
     "playNext": {
       "global": true,
-      "description": "Next youtube video"
+      "description": "Next YouTube video"
     },
     "playPrev": {
       "global": true,
-      "description": "Prev youtube video"
+      "description": "Prev YouTube video"
     }
   }
 }

@@ -7,9 +7,14 @@
     "scripts": ["public/background.js"]
   },
   "browser_action": {
-    "default_icon": "icon-pause-128.png",
-    "default_title": "Pause YouTube video",
+    "default_icon": "icon-pause-32.png",
+    "default_title": "Pause youtube video",
     "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "128": "icon-pause-128.png",
+    "16": "icon-pause-16.png",
+    "64": "icon-pause-64.png"
   },
   "content_scripts": [
     {

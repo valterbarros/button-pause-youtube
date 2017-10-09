@@ -4,7 +4,7 @@
   "description": "Pause a video on YouTube.",
   "scripts": {
     "js-lint": "node_modules/eslint/bin/eslint.js js/**/*",
-    "js-compile": "rm -rf public && mkdir -p public && node_modules/babel-cli/bin/babel.js js -d public"
+    "js-compile": "rm -rf public && mkdir -p public && node_modules/babel-cli/bin/babel.js js -d public",
     "js": "npm run js-lint && npm run js-compile"
   },
   "repository": {

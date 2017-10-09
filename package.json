@@ -1,0 +1,31 @@
+{
+  "name": "button-pause-youtube",
+  "version": "1.3.0",
+  "description": "Pause a video on YouTube.",
+  "scripts": {
+    "js-lint": "node_modules/eslint/bin/eslint.js js/**/*",
+    "js-compile": "rm -rf public && mkdir -p public && node_modules/babel-cli/bin/babel.js js -d public",
+    "js": "npm run js-lint && npm run js-compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valterbarros/button-pause-youtube"
+  },
+  "keywords": [
+    "button",
+    "chrome",
+    "pause",
+    "player",
+    "youtube"
+  ],
+  "author": "Valter Barros <valterinside@gmail.com> (http://valterbarros.com)",
+  "bugs": {
+    "url": "https://github.com/valterbarros/button-pause-youtube/issues"
+  },
+  "homepage": "https://github.com/valterbarros/button-pause-youtube",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.5.0"
+  }
+}

@@ -35,5 +35,47 @@
     }
   });
 
+  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (
+      tabId === window.list_config.playingTab
+      && changeInfo.status === 'complete'
+    ) {
+      tabUrlChanged(tab);
+    }
+  });
+
+  function tabUrlChanged(tab) {
+    fetch("https://www.youtube.com/oembed?url=" + tab.url + "&format=json", { mode: 'cors' })
+      .then(function(response) {
+        if (response.ok === false) {
+          throw Error("Bad metadata response");
+        }
+        return response.json();
+      })
+      .then(function(metadata) {
+        notifyNewSong(metadata.title, metadata.thumbnail_url);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  function notifyNewSong(message, image) {
+    var image = image || chrome.extension.getURL("icon-pause-128.png");
+    if (!("Notification" in window)) {
+      return;
+    }
+    else if (Notification.permission === "granted") {
+      new Notification('Now Playing', { body: message, icon: image });
+    }
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if (permission === "granted") {
+          new Notification('Now Playing', { body: message, icon: image });
+        }
+      });
+    }
+  }
+
   window.list_config = new ListConfig();
 })();

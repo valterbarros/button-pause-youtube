@@ -25,7 +25,8 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "https://www.youtube.com/**"
+    "https://www.youtube.com/**",
+    "notifications"
   ],
   "manifest_version": 2,
   "commands": {

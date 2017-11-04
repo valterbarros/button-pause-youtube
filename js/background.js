@@ -2,6 +2,7 @@
   var ListConfig = function(){
     this.playingTab = -1
     this.hasTabChoised = false
+    this.showNotifications = false
 
     ListConfig.prototype.getCurrentTab = function(){
       return this.playingTab
@@ -15,6 +16,14 @@
     ListConfig.prototype.checkYoutubeSite = function(url){
       var tabYoutubeRegex = new RegExp(/\.youtube\./)
       return tabYoutubeRegex.test(url)
+    }
+    
+    ListConfig.prototype.setNotify = function(state){
+      this.showNotifications = state
+    }
+    
+    ListConfig.prototype.getNotify = function(){
+      return this.showNotifications
     }
   };
   
@@ -61,6 +70,9 @@
   }
 
   function notifyNewSong(message, image) {
+    if (window.list_config.getNotify() === false) {
+      return false;
+    }
     var image = image || chrome.extension.getURL("icon-pause-128.png");
     if (!("Notification" in window)) {
       return;

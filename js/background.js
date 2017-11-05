@@ -25,6 +25,11 @@
     ListConfig.prototype.getNotify = function(){
       return this.showNotifications
     }
+
+    ListConfig.prototype.buildNotificationAndSetTimeOut = function(message, image){
+      var n = new Notification('Now Playing', { body: message, icon: image, tag: 'NewSongStart' });
+      setTimeout(n.close.bind(n), 4000);
+    }
   };
   
   chrome.commands.onCommand.addListener(function(command) {
@@ -78,12 +83,12 @@
       return;
     }
     else if (Notification.permission === "granted") {
-      new Notification('Now Playing', { body: message, icon: image });
+      window.list_config.buildNotificationAndSetTimeOut(message, image)
     }
     else if (Notification.permission !== 'denied') {
       Notification.requestPermission(function (permission) {
         if (permission === "granted") {
-          new Notification('Now Playing', { body: message, icon: image });
+          window.list_config.buildNotificationAndSetTimeOut(message, image)
         }
       });
     }

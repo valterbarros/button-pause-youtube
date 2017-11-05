@@ -28,4 +28,4 @@ And set shortcut to pause youtube video I recommend **ctrl+shift+p**, select opt
 
 To select which video you want take control:
 
-![](https://trello-attachments.s3.amazonaws.com/58d3f199ad888169e1cc9468/5983d7aaa3733d79200c7260/d8cb1daa46c9f4f88aae48662f5f0c73/image.png)
+![](https://trello-attachments.s3.amazonaws.com/5997773aae5a551379d59d12/59ffa400c741ff8303821c31/ac6210948830f9c6e8d78c295506d8cf/upload_11_5_2017_at_8_51_27_PM.png)

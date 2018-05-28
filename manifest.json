@@ -1,9 +1,9 @@
 {
   "name": "Youtube Pause",
-  "version": "1.3",
+  "version": "1.0.1",
+  "manifest_version": 2.0.1,
   "description": "Pause a vídeo on youtube",
   "background": {
-    "persistent": true,
     "scripts": ["js/background.js"]
   },
   "browser_action": {
@@ -27,19 +27,27 @@
     "tabs",
     "https://www.youtube.com/**"
   ],
-  "manifest_version": 2,
   "commands": {
     "playPause": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
       "global": true,
-      "description": "Pause youtube video"
+      "description": "Toggle play/pause"
     },
     "playNext": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
       "global": true,
-      "description": "Next youtube video"
+      "description": "Play next track"
     },
     "playPrev": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
       "global": true,
-      "description": "Prev youtube video"
+      "description": "Play previous track"
     }
   }
 }

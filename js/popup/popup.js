@@ -16,10 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('selectButton').onchange = doSelected;
+  
+  var notificationCheckbox = document.getElementById('notificationCheckbox');
+  notificationCheckbox.checked = chrome.extension.getBackgroundPage().window.list_config.getNotify();
+  notificationCheckbox.onchange = setNotify;
 });
 
 function doSelected(){
   var select = document.getElementById("selectButton");
   var tabId = select.options[select.selectedIndex].value;
   chrome.extension.getBackgroundPage().window.list_config.setCurrentTab(tabId);
+}
+
+function setNotify() {
+  chrome.extension.getBackgroundPage().window.list_config.setNotify(this.checked);
 }

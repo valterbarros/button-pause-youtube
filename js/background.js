@@ -2,6 +2,7 @@
   var ListConfig = function(){
     this.playingTab = -1
     this.hasTabChoised = false
+    this.showNotifications = false
 
     ListConfig.prototype.getCurrentTab = function(){
       return this.playingTab
@@ -15,6 +16,14 @@
     ListConfig.prototype.checkYoutubeSite = function(url){
       var tabYoutubeRegex = new RegExp(/\.youtube\./)
       return tabYoutubeRegex.test(url)
+    }
+    
+    ListConfig.prototype.setNotify = function(state){
+      this.showNotifications = state
+    }
+    
+    ListConfig.prototype.getNotify = function(){
+      return this.showNotifications
     }
   };
   
@@ -34,6 +43,51 @@
       response(window.list_config.checkYoutubeSite(sender.tab.url));
     }
   });
+
+  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (
+      tabId === window.list_config.playingTab
+      && changeInfo.status === 'complete'
+    ) {
+      tabUrlChanged(tab);
+    }
+  });
+
+  function tabUrlChanged(tab) {
+    fetch("https://www.youtube.com/oembed?url=" + tab.url + "&format=json", { mode: 'cors' })
+      .then(function(response) {
+        if (response.ok === false) {
+          throw Error("Bad metadata response");
+        }
+        return response.json();
+      })
+      .then(function(metadata) {
+        notifyNewSong(metadata.title, metadata.thumbnail_url);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  function notifyNewSong(message, image) {
+    if (window.list_config.getNotify() === false) {
+      return false;
+    }
+    var image = image || chrome.extension.getURL("icon-pause-128.png");
+    if (!("Notification" in window)) {
+      return;
+    }
+    else if (Notification.permission === "granted") {
+      new Notification('Now Playing', { body: message, icon: image });
+    }
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if (permission === "granted") {
+          new Notification('Now Playing', { body: message, icon: image });
+        }
+      });
+    }
+  }
 
   window.list_config = new ListConfig();
 })();

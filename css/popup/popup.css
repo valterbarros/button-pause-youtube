@@ -30,3 +30,8 @@ select {
     margin-bottom: 15px;
     padding: 0 10px;
 }
+
+.notification-checkbox {
+    display: block;
+    margin-bottom: 15px;
+}
